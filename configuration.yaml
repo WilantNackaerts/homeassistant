@@ -6,8 +6,21 @@ frontend:
 
 input_select: !include includes/input_selects.yaml
 light: !include includes/lights.yaml
-
+#afvalbeheer: !include includes/afvalbeheer.yaml
 spotify: !include includes/spotify.yaml
+
+sensor:
+  - platform: afvalbeheer
+    wastecollector: RecycleApp             
+    resources:                       
+      - restafval
+      - gft
+      - papier
+      - pmd
+      - zachteplastic
+    postcode: !secret postalcode
+    streetname: !secret streetname                
+    streetnumber: !secret streetnumber
 
 # Text to speech
 tts:

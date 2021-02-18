@@ -14,7 +14,7 @@
     domain: switch
   mode: single
 - id: '1613575245765'
-  alias: Roomba start
+  alias: 'Roomba: started cleaning'
   description: ''
   trigger:
   - platform: device
@@ -24,14 +24,13 @@
     type: cleaning
   condition: []
   action:
-  - device_id: a6937089cecaef3bf1b00dece90ddd06
-    domain: mobile_app
-    type: notify
-    message: Roomba started!
-    title: Chantall is cleaning.
+  - service: notify.mobile_app_oneplus_nord
+    data:
+      title: Roomba
+      message: Chantall started to clean!
   mode: single
 - id: '1613575275607'
-  alias: Roomba stop
+  alias: 'Roomba: stopped cleaning'
   description: ''
   trigger:
   - platform: device
@@ -41,11 +40,10 @@
     type: docked
   condition: []
   action:
-  - device_id: a6937089cecaef3bf1b00dece90ddd06
-    domain: mobile_app
-    type: notify
-    message: Roomba done!
-    title: Chantall finished cleaning.
+  - service: notify.mobile_app_oneplus_nord
+    data:
+      title: Roomba
+      message: Chantall finished cleaning!
   mode: single
 - id: '1613655082689'
   alias: 'Frontend: change theme'
