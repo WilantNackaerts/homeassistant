@@ -1,0 +1,72 @@
+- id: '1613574979356'
+  alias: Afzuiging
+  description: ''
+  trigger:
+  - platform: time
+    at: '18:00'
+  - platform: time
+    at: '21:00'
+  condition: []
+  action:
+  - type: toggle
+    device_id: 4fd8739fc31b27e05ad9bbeb55f8e553
+    entity_id: switch.extraction
+    domain: switch
+  mode: single
+- id: '1613575245765'
+  alias: Roomba start
+  description: ''
+  trigger:
+  - platform: device
+    device_id: 7642ad1b24188c6f1cb3d50f909e1a6f
+    domain: vacuum
+    entity_id: vacuum.chantall
+    type: cleaning
+  condition: []
+  action:
+  - device_id: a6937089cecaef3bf1b00dece90ddd06
+    domain: mobile_app
+    type: notify
+    message: Roomba started!
+    title: Chantall is cleaning.
+  mode: single
+- id: '1613575275607'
+  alias: Roomba stop
+  description: ''
+  trigger:
+  - platform: device
+    device_id: 7642ad1b24188c6f1cb3d50f909e1a6f
+    domain: vacuum
+    entity_id: vacuum.chantall
+    type: docked
+  condition: []
+  action:
+  - device_id: a6937089cecaef3bf1b00dece90ddd06
+    domain: mobile_app
+    type: notify
+    message: Roomba done!
+    title: Chantall finished cleaning.
+  mode: single
+- id: '1613655082689'
+  alias: 'Frontend: change theme'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: input_select.theme
+  - platform: state
+    entity_id: input_boolean.dark_mode
+  - platform: state
+    entity_id: input_boolean.theme_alternative
+  - platform: homeassistant
+    event: start
+  condition: []
+  action:
+    service: frontend.set_theme
+    data:
+      name: '{% set which = "dark" if is_state("input_boolean.dark_mode", "on") else
+        "light" -%} {% set name = states("input_select.theme") -%} {% set suffix =
+        "-alternative" if is_state("input_boolean.theme_alternative", "on") else ""
+        -%} ios-{{ which }}-mode-{{ name }}{{ suffix }}
+
+        '
+  mode: single

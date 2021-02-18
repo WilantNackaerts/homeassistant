@@ -1,0 +1,2 @@
+2021-02-18 15:39:55 WARNING (MainThread) [homeassistant.loader] You are using a custom integration for hacs which has not been tested by Home Assistant. This component might cause stability problems, be sure to disable it if you experience issues with Home Assistant.
+2021-02-18 15:52:09 WARNING (MainThread) [pytradfri.api.aiocoap_api] Protocol is shutdown, cancelling command: 10.10.10.80 <Command get ['15011', '15012']>
