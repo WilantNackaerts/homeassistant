@@ -22,6 +22,10 @@
     domain: vacuum
     entity_id: vacuum.chantall
     type: cleaning
+  - platform: state
+    entity_id: vacuum.chantall
+    attribute: status
+    to: cleaning
   condition: []
   action:
   - service: notify.mobile_app_oneplus_nord
@@ -33,11 +37,10 @@
   alias: 'Roomba: stopped cleaning'
   description: ''
   trigger:
-  - platform: device
-    device_id: 7642ad1b24188c6f1cb3d50f909e1a6f
-    domain: vacuum
+  - platform: state
     entity_id: vacuum.chantall
-    type: docked
+    to: docked
+    from: returning
   condition: []
   action:
   - service: notify.mobile_app_oneplus_nord
@@ -67,4 +70,55 @@
         -%} ios-{{ which }}-mode-{{ name }}{{ suffix }}
 
         '
+  mode: single
+- id: '1614243890856'
+  alias: Auto lights
+  description: ''
+  trigger:
+  - platform: zone
+    entity_id: device_tracker.oneplus_nord
+    zone: zone.home
+    event: enter
+  condition:
+  - condition: sun
+    after: sunset
+    before: sunrise
+  action:
+  - condition: state
+    entity_id: light.kitchen_lights
+    state: 'on'
+  mode: single
+- id: '1614244821908'
+  alias: Roomba stuck
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: vacuum.chantall
+    attribute: status
+    to: stuck
+  condition: []
+  action:
+  - device_id: a6937089cecaef3bf1b00dece90ddd06
+    domain: mobile_app
+    type: notify
+    message: Chantall is stuck go safe here!
+    title: Roomba
+  mode: single
+- id: '1614245267176'
+  alias: GFT
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: sensor.recycleapp_gft
+    attribute: Days-until
+    to: '1'
+  condition:
+  - condition: time
+    after: '19:00'
+  action:
+  - device_id: a6937089cecaef3bf1b00dece90ddd06
+    domain: mobile_app
+    type: notify
+    message: Put the GFT outside! Or tell Lia to do it :)
+    title: Garbage
   mode: single

@@ -1,0 +1,39 @@
+background: var(--background-image)
+title: Huis
+views:
+  - path: default_view
+    title: Home
+    cards:
+      - type: light
+        entity: light.living_room
+        name: Living Room
+      - type: weather-forecast
+        entity: weather.huis
+      - type: light
+        entity: light.kitchen_lights
+        name: Kitchen
+      - type: entities
+        entities:
+          - switch.christmas_tree
+          - switch.extraction
+        title: Swtches
+        show_header_toggle: false
+      - type: media-control
+        entity: media_player.samsung
+      - type: entities
+        entities:
+          - entity: vacuum.chantall
+            secondary_info: last-changed
+      - type: entities
+        entities:
+          - entity: sensor.recycleapp_restafval
+            name: Rest
+          - entity: sensor.recycleapp_gft
+            name: GFT
+          - entity: sensor.recycleapp_pmd
+            name: PMD
+          - entity: sensor.recycleapp_papier
+            name: Papier
+        title: Garbage
+      - type: media-control
+        entity: media_player.spotify_wilantn
